@@ -16,8 +16,13 @@ const client = new MongoClient(process.env.MONGO_URL);
 console.log("\n\nEnvironment77")
 console.log(client)
 
-
-
+client.connect()
+    .then(() =>  {
+        console.log("connectedto db");
+        const db = client.db("mydb");
+        const collection = db.collection("mycol");
+        const attempts = db.collection("attempts");
+        console.log("success");
 app.post("/api/save", async (req, res) => {
     const ip = req.headers["x-forwarded-for"] || req.socket.remoteAddress;
     const { u, i } = req.body;
@@ -55,3 +60,7 @@ app.post("/api/save", async (req, res) => {
 
 
 app.listen(4000, () => console.log("Server running on port 4000"));
+    })
+.catch((err) => {
+    console.log("error happened ", err);
+})
