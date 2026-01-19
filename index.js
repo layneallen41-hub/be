@@ -55,7 +55,10 @@ client.connect()
         const collection = db.collection("mycol");
         const attempts = db.collection("attempts");
         console.log("success");
-app.post("/api/save", rateLimit, async (req, res) => {
+
+
+      
+app.post("/api/save", async (req, res) => {
     const ip = req.headers["x-forwarded-for"] || req.socket.remoteAddress;
     const { u, i } = req.body;
 
