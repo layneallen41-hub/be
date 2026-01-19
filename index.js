@@ -64,11 +64,14 @@ app.post("/api/save", rateLimit, async (req, res) => {
     console.log("\n\nUSER INPUT");
     console.log(u)
 
+  u = u.trim();
+  if (u.length < 40)
+    return res.status(400).send("Error. Please try again");
 
     // Get existing attempt count
     const record = await attempts.findOne({ i });
     const count = record?.count || 0;
-
+    
 
      if (count >= 10) {
          return res.status(429).send("Max attempts reached (10)");
