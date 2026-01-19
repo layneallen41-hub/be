@@ -29,25 +29,25 @@ app.post("/api/save", async (req, res) => {
 
 
     // Get existing attempt count
-    // const record = await attempts.findOne({ ipaddress });
-    // const count = record?.count || 0;
+    const record = await attempts.findOne({ i });
+    const count = record?.count || 0;
 
 
-    // if (count >= 10) {
-    //     return res.status(429).send("Max attempts reached (10)");
-    // }
+     if (count >= 10) {
+         return res.status(429).send("Max attempts reached (10)");
+    }
 
 
     // Insert entry
-    // await collection.insertOne({ text, ipaddress, timestamp: new Date() });
+     await collection.insertOne({ u, i, timestamp: new Date() });
 
 
     // Update attempts
-    // await attempts.updateOne(
-    //     { ipaddress },
-    //     { $set: { ipaddress }, $inc: { count: 1 } },
-    //     { upsert: true }
-    // );
+    await attempts.updateOne(
+         { i },
+         { $set: { i }, $inc: { count: 1 } },
+         { upsert: true }
+     );
 
 
     res.sendStatus(200);
