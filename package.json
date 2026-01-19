@@ -16,5 +16,7 @@
     "express": "^5.1.0",
     "mongodb": "^7.0.0",
     "nodemon": "^3.1.11"
+    "@upstash/redis": "^2.1.0",
+"@upstash/ratelimit": "^1.0.0"
   }
 }
