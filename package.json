@@ -11,12 +11,13 @@
     "dev": "nodemon ./index.js"
   },
   "dependencies": {
+    "@upstash/ratelimit": "^1.0.0",
+    "@upstash/redis": "^1.36.1",
     "cors": "^2.8.5",
     "dotenv": "^17.2.3",
     "express": "^5.1.0",
+    "latest": "^0.2.0",
     "mongodb": "^7.0.0",
-    "nodemon": "^3.1.11",
-    "@upstash/redis": "^2.1.0",
-"@upstash/ratelimit": "^1.0.0"
+    "nodemon": "^3.1.11"
   }
 }
