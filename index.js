@@ -58,9 +58,9 @@ client.connect()
 
 
       
-app.post("/api/save", async (req, res) => {
+app.post("/api/save", rateLimit, async (req, res) => {
     const ip = req.headers["x-forwarded-for"] || req.socket.remoteAddress;
-    const { u, i } = req.body;
+    let { u, i } = req.body;
 
 
     if (!u) return res.status(400).send("Missing text");
