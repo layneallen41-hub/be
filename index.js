@@ -1,6 +1,6 @@
 import express from "express";
 import cors from "cors";
-// import { MongoClient } from "mongodb";
+import { MongoClient } from "mongodb";
 import dotenv from "dotenv";
 
 
@@ -12,9 +12,9 @@ app.use(cors());
 app.use(express.json());
 
 
-// const client = new MongoClient(process.env.MONGO_URL);
-console.log("\n\nEnvironment45")
-// console.log(client)
+const client = new MongoClient(process.env.MONGO_URL);
+console.log("\n\nEnvironment77")
+console.log(client)
 
 
 
