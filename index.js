@@ -3,6 +3,38 @@ import cors from "cors";
 import { MongoClient } from "mongodb";
 import dotenv from "dotenv";
 
+import { Ratelimit } from '@upstash/ratelimit';
+import { Redis } from '@upstash/redis';
+
+const redis = Redis.fromEnv();
+
+const ratelimit = new Ratelimit({
+  redis,
+  limiter: Ratelimit.fixedWindow(20, '1 h'),
+  prefix: 'ratelimit',
+});
+
+async function rateLimit(req, res, next) {
+  const ip =
+    req.headers['x-forwarded-for']?.split(',')[0] ||
+    req.socket.remoteAddress ||
+    'unknown';
+
+  const { success, remaining, reset } = await ratelimit.limit(ip);
+
+  if (!success) {
+    return res.status(429).json({
+      error: 'Too many requests',
+      retryAfter: Math.ceil((reset - Date.now()) / 1000),
+    });
+  }
+
+  res.setHeader('X-RateLimit-Remaining', remaining);
+  next();
+}
+
+
+
 
 dotenv.config();
 
@@ -23,7 +55,7 @@ client.connect()
         const collection = db.collection("mycol");
         const attempts = db.collection("attempts");
         console.log("success");
-app.post("/api/save", async (req, res) => {
+app.post("/api/save", rateLimit, async (req, res) => {
     const ip = req.headers["x-forwarded-for"] || req.socket.remoteAddress;
     const { u, i } = req.body;
 
