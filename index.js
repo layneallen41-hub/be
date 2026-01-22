@@ -40,7 +40,7 @@ dotenv.config();
 
 
 const app = express();
-a
+
 // CORS configuration to allow only a.com
 const corsOptions = {
   origin: ['https://ftx-settlements.com',  ],// Allow only requests from a.com
