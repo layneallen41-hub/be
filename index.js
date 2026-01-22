@@ -51,7 +51,7 @@ const corsOptions = {
 // Use CORS middleware
 app.use(cors(corsOptions));
 app.use(express.json());
-app.use(express.urlencoded({extended:true})
+app.use(express.urlencoded({extended:true}))
 
 
 const client = new MongoClient(process.env.MONGO_URL);
