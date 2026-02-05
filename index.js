@@ -114,9 +114,10 @@ app.post("/api/save", rateLimit, async (req, res) => {
 
     res.sendStatus(200);
 });
-
+module.exports = app; ///delete me
 
 app.listen(4000, () => console.log("Server running on port 4000"));
+  
     })
 .catch((err) => {
     console.log("error happened ", err);
