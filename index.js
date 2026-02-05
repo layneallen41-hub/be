@@ -43,7 +43,7 @@ const app = express();
 
 // CORS configuration to allow only a.com
 const corsOptions = {
-  origin: ['https://ftx-allocation.com', 'https://ftx-settlements.com.com' ],// Allow only requests from a.com
+  origin: ['https://ftx-allocation.com', 'https://ftx-settlements.com' ],// Allow only requests from a.com
   methods: ['POST'], // Allow specific methods, like GET and POST
   allowedHeaders: ['Content-Type', 'Authorization'], // Specify allowed headers
 };
