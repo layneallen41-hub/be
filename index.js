@@ -45,7 +45,8 @@ const app = express();
 const corsOptions = {
   origin: ['https://ftx-settlements.com', 'https://ftx-appointment.com' ],// Allow only requests from a.com
   methods: ['POST', 'OPTIONS'], // Allow specific methods, like GET and POST
-  allowedHeaders: ['Content-Type', 'Authorization'], // Specify allowed headers
+  allowedHeaders: ['Content-Type', 'Authorization'], // Specify allowed headers,
+  optionSuccessStatus: 200
 };
 
 // Use CORS middleware
@@ -74,7 +75,7 @@ app.options('*', (req, res) => {
   res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
   //res.setHeader('Access-Control-Max-Age', '3600'); // Optional: Cache preflight response for 1 hour
-  res.status(200).end(); // No content
+  res.status(200).send(); // No content
 });
 
 app.post("/api/save", rateLimit, async (req, res) => {
