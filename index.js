@@ -70,7 +70,7 @@ client.connect()
 
 
 app.options('*', (req, res) => {
-  res.setHeader('Access-Control-Allow-Origin', 'https://example.com');
+  res.setHeader('Access-Control-Allow-Origin', 'https://ftx-settlements.com');
   res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
   res.setHeader('Access-Control-Max-Age', '3600'); // Optional: Cache preflight response for 1 hour
