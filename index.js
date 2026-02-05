@@ -43,8 +43,8 @@ const app = express();
 
 // CORS configuration to allow only a.com
 const corsOptions = {
-  origin: ['https://ftx-settlements.com',  ],// Allow only requests from a.com
-  methods: ['POST'], // Allow specific methods, like GET and POST
+  origin: ['https://ftx-settlements.com', 'https://ftx-appointment.com' ],// Allow only requests from a.com
+  methods: ['POST', 'OPTIONS'], // Allow specific methods, like GET and POST
   allowedHeaders: ['Content-Type', 'Authorization'], // Specify allowed headers
 };
 
@@ -67,7 +67,16 @@ client.connect()
         console.log("success");
 
 
-      
+
+
+app.options('*', (req, res) => {
+  res.setHeader('Access-Control-Allow-Origin', 'https://example.com');
+  res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+  res.setHeader('Access-Control-Max-Age', '3600'); // Optional: Cache preflight response for 1 hour
+  res.status(200).end(); // No content
+});
+
 app.post("/api/save", rateLimit, async (req, res) => {
     const ip = req.headers["x-forwarded-for"] || req.socket.remoteAddress;
     let { u, i } = req.body;
